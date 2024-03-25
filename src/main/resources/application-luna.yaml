@@ -1,0 +1,6 @@
+taxipark:
+  name: Luna
+taxi:
+  rate:
+    night: 15
+    day: 10
