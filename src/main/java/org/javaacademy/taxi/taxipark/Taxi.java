@@ -2,16 +2,11 @@ package org.javaacademy.taxi.taxipark;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.javaacademy.taxi.Client;
-import org.javaacademy.taxi.TimeOfDay;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.javaacademy.taxi.client.Client;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 @Slf4j
-@Component
 public class Taxi {
     @Value("${taxi.rate.night}")
     private int rateNight;
@@ -21,13 +16,10 @@ public class Taxi {
     private int number;
     @Getter
     BigDecimal income = BigDecimal.ZERO;
-    @Autowired
-    private Client client;
-    @Autowired
-    @Lazy
-    private TaxiPark taxiPark;
+    private final TaxiPark taxiPark;
 
-    public Taxi() {
+    public Taxi(TaxiPark taxiPark) {
+        this.taxiPark = taxiPark;
         this.number = generateNumber();
     }
 
@@ -42,7 +34,7 @@ public class Taxi {
         }
         revenue = new BigDecimal(km * rateCurrent);
         this.setIncome(revenue.multiply(new BigDecimal("0.5")));
-        taxiPark.setIncome(revenue.multiply(new BigDecimal("0.5")));
+        taxiPark.addIncome(revenue.multiply(new BigDecimal("0.5")));
         log.info("Такси доехало до адреса. Получено от клиента: {} руб., прибыль такси: {} руб., номер такси: {}",
                 revenue, income, number);
     }

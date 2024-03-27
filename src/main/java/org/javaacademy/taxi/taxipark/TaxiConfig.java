@@ -6,17 +6,17 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class TaxiConfig {
     @Bean
-    public Taxi taxi1() {
-        return new Taxi();
+    public Taxi taxi1(TaxiPark taxiPark) {
+        return new Taxi(taxiPark);
     }
 
     @Bean
-    public Taxi taxi2() {
-        return new Taxi();
+    public Taxi taxi2(TaxiPark taxiPark) {
+        return new Taxi(taxiPark);
     }
 
     @Bean
-    public Taxi taxi3() {
-        return new Taxi();
+    public Taxi taxi3(TaxiPark taxiPark) {
+        return new Taxi(taxiPark);
     }
 }

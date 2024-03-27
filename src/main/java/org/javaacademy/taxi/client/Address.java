@@ -1,4 +1,4 @@
-package org.javaacademy.taxi;
+package org.javaacademy.taxi.client;
 
 import lombok.Getter;
 
@@ -7,9 +7,8 @@ public enum Address {
     LOCATION1 ("Березовая роща", 10),
     LOCATION2 ("Кандикюля", 4),
     LOCATION3 ("Строитель", 12);
-
-    private String address;
-    private int km;
+    private final String address;
+    private final int km;
 
     Address(String address, int km) {
         this.address = address;

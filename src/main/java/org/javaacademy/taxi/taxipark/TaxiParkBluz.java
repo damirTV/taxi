@@ -14,21 +14,19 @@ import java.util.List;
 import java.util.Queue;
 
 @Slf4j
-@Profile("luna")
+@Profile("bluz")
 @Component
-public class TaxiParkLuna extends TaxiPark implements ApplicationListener<ContextClosedEvent> {
+public class TaxiParkBluz extends TaxiPark implements ApplicationListener<ContextClosedEvent> {
     private final Taxi taxi1;
     private final Taxi taxi2;
-    private final Taxi taxi3;
     private final Queue<Taxi> taxiQueue = new LinkedList<>();
 
-    public TaxiParkLuna(@Lazy Taxi taxi1, @Lazy Taxi taxi2, @Lazy Taxi taxi3) {
+    public TaxiParkBluz(@Lazy Taxi taxi1, @Lazy Taxi taxi2) {
         super();
         this.taxi1 = taxi1;
         this.taxi2 = taxi2;
-        this.taxi3 = taxi3;
-        this.taxiQueue.addAll(List.of(taxi1, taxi2, taxi3));
-        }
+        this.taxiQueue.addAll(List.of(taxi1, taxi2));
+    }
 
     @Override
     public void addIncome(BigDecimal incomeByTaxi) {

@@ -1,0 +1,6 @@
+taxipark:
+  name: Bluz
+taxi:
+  rate:
+    night: 30
+    day: 7
