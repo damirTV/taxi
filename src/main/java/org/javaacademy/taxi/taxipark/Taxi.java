@@ -4,7 +4,9 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.javaacademy.taxi.Client;
 import org.javaacademy.taxi.TimeOfDay;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
@@ -18,13 +20,14 @@ public class Taxi {
     @Getter
     private int number;
     @Getter
-    BigDecimal income;
+    BigDecimal income = BigDecimal.ZERO;
+    @Autowired
     private Client client;
+    @Autowired
+    @Lazy
     private TaxiPark taxiPark;
 
-    public Taxi(Client client, TaxiPark taxiPark) {
-        this.client = client;
-        this.taxiPark = taxiPark;
+    public Taxi() {
         this.number = generateNumber();
     }
 
@@ -38,11 +41,14 @@ public class Taxi {
             rateCurrent = rateNight;
         }
         revenue = new BigDecimal(km * rateCurrent);
-        income = revenue.multiply(new BigDecimal("0.5"));
+        this.setIncome(revenue.multiply(new BigDecimal("0.5")));
         taxiPark.setIncome(revenue.multiply(new BigDecimal("0.5")));
-        log.info("Доход: {}", revenue);
-        log.info("Прибыль: {}", income);
-        log.info("Номер такси: {}", number);
+        log.info("Такси доехало до адреса. Получено от клиента: {} руб., прибыль такси: {} руб., номер такси: {}",
+                revenue, income, number);
+    }
+
+    private void setIncome(BigDecimal revenue) {
+        income = income.add(revenue);
     }
 
     private int tarrifs(String address) {
