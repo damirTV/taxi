@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextClosedEvent;
 import java.math.BigDecimal;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 @Slf4j
@@ -40,8 +41,8 @@ public abstract class TaxiPark implements ApplicationListener<ContextClosedEvent
         this.setIncome(this.getIncome().add(incomeByTaxi));
     }
 
-    protected void setTaxiQueue(Taxi taxi) {
-        this.taxiQueue.add(taxi);
+    protected void setTaxiQueue(List<Taxi> taxiList) {
+        this.taxiQueue.addAll(taxiList);
     }
 
     private void report() {
