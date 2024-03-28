@@ -17,14 +17,10 @@ import java.util.Queue;
 @Profile("bluz")
 @Component
 public class TaxiParkBluz extends TaxiPark implements ApplicationListener<ContextClosedEvent> {
-    private final Taxi taxi1;
-    private final Taxi taxi2;
     private final Queue<Taxi> taxiQueue = new LinkedList<>();
 
     public TaxiParkBluz(@Lazy Taxi taxi1, @Lazy Taxi taxi2) {
         super();
-        this.taxi1 = taxi1;
-        this.taxi2 = taxi2;
         this.taxiQueue.addAll(List.of(taxi1, taxi2));
     }
 

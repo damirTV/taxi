@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.javaacademy.taxi.client.Client;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
+
 import java.math.BigDecimal;
 
 @Slf4j
