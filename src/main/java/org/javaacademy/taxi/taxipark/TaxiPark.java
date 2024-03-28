@@ -40,7 +40,7 @@ public abstract class TaxiPark implements ApplicationListener<ContextClosedEvent
         this.setIncome(this.getIncome().add(incomeByTaxi));
     }
 
-    public void setTaxiQueue(Taxi taxi) {
+    protected void setTaxiQueue(Taxi taxi) {
         this.taxiQueue.add(taxi);
     }
 
